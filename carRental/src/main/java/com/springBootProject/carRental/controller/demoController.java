@@ -12,6 +12,6 @@ public class demoController {
 
     @GetMapping("/hii")
     private String hii() {
-        return "hii";
+        return "Hello";
     }
 }
