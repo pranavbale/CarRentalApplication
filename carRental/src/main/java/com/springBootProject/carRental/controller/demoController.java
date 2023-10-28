@@ -10,8 +10,4 @@ public class demoController {
         return "HelloWorld!!!";
     }
 
-    @GetMapping("/hii")
-    private String hii() {
-        return "Hello";
-    }
 }
