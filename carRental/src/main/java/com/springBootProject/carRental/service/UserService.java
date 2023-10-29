@@ -6,6 +6,8 @@ import com.springBootProject.carRental.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,5 +17,9 @@ public class UserService {
     public User addUser(UserRequest userRequest) {
         User user = User.build(Long.valueOf(0), userRequest.getName(), userRequest.getEmail(), userRequest.getPassword(), userRequest.getNumber(), userRequest.getDrivingLicenceNumber(), userRequest.getAddress());
         return userRepository.save(user);
+    }
+
+    public List<User> vidwAllUser() {
+        return (List) userRepository.findAll();
     }
 }
