@@ -23,9 +23,14 @@ public class UserController {
         return new ResponseEntity<>(userService.addUser(userRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     private ResponseEntity<List<User>> viewAllUser() {
         return ResponseEntity.ok(userService.viewAllUser());
+    }
+
+    @GetMapping("/findById/{id}")
+    private ResponseEntity<User> findUserById(@PathVariable Long id) throws UserNotFoundException {
+        return ResponseEntity.ok(userService.findUserById(id));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,6 +38,5 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
-
 
 }
