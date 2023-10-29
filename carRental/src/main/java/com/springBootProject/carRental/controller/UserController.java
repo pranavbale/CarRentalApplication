@@ -39,4 +39,9 @@ public class UserController {
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
+    @PutMapping("update/{id}")
+    private ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) throws UserNotFoundException {
+        return ResponseEntity.ok(userService.updateUser(id, user));
+    }
+
 }
