@@ -2,6 +2,7 @@ package com.springBootProject.carRental.controller;
 
 import com.springBootProject.carRental.dto.UserRequest;
 import com.springBootProject.carRental.entity.User;
+import com.springBootProject.carRental.exception.UserNotFoundException;
 import com.springBootProject.carRental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,13 @@ public class UserController {
 
     @GetMapping("/all")
     private ResponseEntity<List<User>> viewAllUser() {
-        return ResponseEntity.ok(userService.vidwAllUser());
+        return ResponseEntity.ok(userService.viewAllUser());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<String> deleteUser(@PathVariable Long id) throws UserNotFoundException {
+        userService.deleteUser(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
 

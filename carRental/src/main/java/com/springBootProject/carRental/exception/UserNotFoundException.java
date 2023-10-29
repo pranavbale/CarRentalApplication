@@ -4,11 +4,11 @@ import org.apache.logging.log4j.message.Message;
 
 public class UserNotFoundException extends Exception{
 
-    UserNotFoundException() {
+    public UserNotFoundException() {
         super();
     }
 
-    UserNotFoundException(String message) {
+    public UserNotFoundException(String message) {
         super(message);
     }
 }
