@@ -50,4 +50,39 @@ public class UserService {
     }
 
 
+    public User updateUser(Long id, User user) throws UserNotFoundException{
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User oldUser = optionalUser.get();
+
+            if (!oldUser.getName().equals(user.getName())) {
+                oldUser.setName(user.getName());
+            }
+
+            if (!oldUser.getEmail().equals(user.getEmail())) {
+                oldUser.setEmail(user.getEmail());
+            }
+
+            if (!oldUser.getPassword().equals(user.getPassword())) {
+                oldUser.setPassword(user.getPassword());
+            }
+
+            if (!oldUser.getNumber().equals(user.getNumber())) {
+                oldUser.setNumber(user.getNumber());
+            }
+
+            if (!oldUser.getDrivingLicenceNumber().equals(user.getDrivingLicenceNumber())) {
+                oldUser.setDrivingLicenceNumber(user.getDrivingLicenceNumber());
+            }
+
+            if (!oldUser.getAddress().equals(user.getAddress())) {
+                oldUser.setAddress(user.getAddress());
+            }
+
+            return userRepository.save(oldUser);
+        } else {
+            throw new UserNotFoundException("user is not present having Id " + id);
+        }
+    }
 }
