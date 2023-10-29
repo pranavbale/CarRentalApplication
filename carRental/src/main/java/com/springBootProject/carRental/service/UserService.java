@@ -25,6 +25,17 @@ public class UserService {
         return (List) userRepository.findAll();
     }
 
+    public User findUserById(Long id) throws UserNotFoundException{
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isPresent()) {
+            User  user = userOptional.get();
+            return user;
+        } else {
+            throw new UserNotFoundException("This user is not present " + id);
+        }
+    }
+
 
     public void deleteUser(Long id) throws UserNotFoundException {
         Optional<User> userOptional = userRepository.findById(id);
@@ -34,7 +45,9 @@ public class UserService {
             userRepository.delete(user);
         } else {
 
-            throw new UserNotFoundException("This user does not exist");
+            throw new UserNotFoundException("This user does not exist" + id);
         }
     }
+
+
 }
