@@ -9,5 +9,9 @@ public class demoController {
     private String helloWorld() {
         return "HelloWorld!!!";
     }
+    @GetMapping("/hii")
+    private String hii() {
+    	return "hii";
+    }
 
 }
