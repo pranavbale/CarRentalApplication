@@ -31,4 +31,5 @@ public class CarController {
     private ResponseEntity<Car> findCarByID(@PathVariable Long id) throws CarNotFoundException {
         return ResponseEntity.ok(carService.findCarByID(id));
     }
+    
 }
