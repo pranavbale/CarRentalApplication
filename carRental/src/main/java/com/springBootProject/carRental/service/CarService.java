@@ -36,4 +36,32 @@ public class CarService {
             throw new CarNotFoundException("Car Is Not Found Having ID " +id);
         }
     }
+
+    public void deleteCarById(Long id) throws CarNotFoundException {
+        Optional<Car> optionalCar=carRepository.findById(id);
+        if (optionalCar.isPresent()){
+            Car car = optionalCar.get();
+            carRepository.delete(car);
+        }else {
+            throw new CarNotFoundException("Car Is Not Found Having ID " +id);
+        }
+    }
+
+    public Car updateCar(Car newCar, Long id) throws CarNotFoundException {
+        Optional<Car> optionalCar=carRepository.findById(id);
+        if (optionalCar.isPresent()){
+            Car oldCar=optionalCar.get();
+
+            oldCar.setCarNumber(newCar.getCarNumber());
+            oldCar.setOwnerName(newCar.getOwnerName());
+            oldCar.setNoOfSeats(newCar.getNoOfSeats());
+            oldCar.setTypeOfCar(newCar.getTypeOfCar());
+
+            return carRepository.save(oldCar);
+
+        }else {
+
+            throw new CarNotFoundException("Car Is Not Found Having ID " +id);
+        }
+    }
 }
