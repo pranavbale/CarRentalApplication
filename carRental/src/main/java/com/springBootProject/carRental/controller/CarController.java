@@ -31,5 +31,15 @@ public class CarController {
     private ResponseEntity<Car> findCarByID(@PathVariable Long id) throws CarNotFoundException {
         return ResponseEntity.ok(carService.findCarByID(id));
     }
-    
+
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<String> deleteCarByID(@PathVariable Long id) throws CarNotFoundException{
+        carService.deleteCarById(id);
+        return ResponseEntity.ok("Deleted");
+    }
+
+    @PostMapping("/update/{id}")
+    private ResponseEntity<Car> updateCar(@RequestBody Car car,@PathVariable Long id) throws CarNotFoundException{
+        return ResponseEntity.ok(carService.updateCar(car,id));
+    }
 }
