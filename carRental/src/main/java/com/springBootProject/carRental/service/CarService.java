@@ -2,13 +2,18 @@ package com.springBootProject.carRental.service;
 
 import com.springBootProject.carRental.dto.CarRequest;
 import com.springBootProject.carRental.entity.Car;
+import com.springBootProject.carRental.exception.CarNotFoundException;
 import com.springBootProject.carRental.repository.CarRepository;
 import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CarService {
+
     @Autowired
     CarRepository carRepository;
 
@@ -16,5 +21,19 @@ public class CarService {
     public Car creatCar(CarRequest carRequest) {
         Car car=Car.build(Long.valueOf(0),carRequest.getOwnerName(),carRequest.getCarNumber(),carRequest.getNoOfSeats(),carRequest.getTypeOfCar());
         return carRepository.save(car);
+    }
+
+    public List<Car> findAllCar() {
+        return (List<Car>) carRepository.findAll();
+    }
+
+    public Car findCarByID(Long id) throws CarNotFoundException {
+        Optional<Car> optionalCar=carRepository.findById(id);
+        if (optionalCar.isPresent()){
+            Car car = optionalCar.get();
+            return car;
+        }else {
+            throw new CarNotFoundException("Car Is Not Found Having ID " +id);
+        }
     }
 }
