@@ -19,7 +19,7 @@ public class CarService {
 
 
     public Car creatCar(CarRequest carRequest) {
-        Car car=Car.build(Long.valueOf(0),carRequest.getOwnerName(),carRequest.getCarNumber(),carRequest.getNoOfSeats(),carRequest.getTypeOfCar());
+        Car car = Car.build(Long.valueOf(0), carRequest.getOwnerName(), carRequest.getCarNumber(), carRequest.getNoOfSeats(), carRequest.getTypeOfCar());
         return carRepository.save(car);
     }
 
@@ -28,29 +28,29 @@ public class CarService {
     }
 
     public Car findCarByID(Long id) throws CarNotFoundException {
-        Optional<Car> optionalCar=carRepository.findById(id);
-        if (optionalCar.isPresent()){
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
             return car;
-        }else {
-            throw new CarNotFoundException("Car Is Not Found Having ID " +id);
+        } else {
+            throw new CarNotFoundException("Car Is Not Found Having ID " + id);
         }
     }
 
     public void deleteCarById(Long id) throws CarNotFoundException {
-        Optional<Car> optionalCar=carRepository.findById(id);
-        if (optionalCar.isPresent()){
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
             carRepository.delete(car);
-        }else {
-            throw new CarNotFoundException("Car Is Not Found Having ID " +id);
+        } else {
+            throw new CarNotFoundException("Car Is Not Found Having ID " + id);
         }
     }
 
     public Car updateCar(Car newCar, Long id) throws CarNotFoundException {
-        Optional<Car> optionalCar=carRepository.findById(id);
-        if (optionalCar.isPresent()){
-            Car oldCar=optionalCar.get();
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isPresent()) {
+            Car oldCar = optionalCar.get();
 
             oldCar.setCarNumber(newCar.getCarNumber());
             oldCar.setOwnerName(newCar.getOwnerName());
@@ -59,9 +59,10 @@ public class CarService {
 
             return carRepository.save(oldCar);
 
-        }else {
+        } else {
 
-            throw new CarNotFoundException("Car Is Not Found Having ID " +id);
+            throw new CarNotFoundException("Car Is Not Found Having ID " + id);
         }
     }
+    
 }

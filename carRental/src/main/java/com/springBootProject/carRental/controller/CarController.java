@@ -19,7 +19,7 @@ public class CarController {
     CarService carService;
 
     @PostMapping("/createCar")
-    private ResponseEntity<Car> createCar(@RequestBody CarRequest carRequest){
+    private ResponseEntity<Car> creatCar(@RequestBody CarRequest carRequest){
         return new ResponseEntity<>(carService.creatCar(carRequest), HttpStatus.CREATED);
     }
     @GetMapping("/findAll")
