@@ -24,4 +24,5 @@ public class Car {
     private String carNumber;
     private Integer noOfSeats;
     private String typeOfCar;
+    
 }
